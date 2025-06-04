@@ -1,0 +1,82 @@
+.main{
+   
+    background-color:#f5f5f5;
+    height: 100%;
+    justify-content: center; /* căn ngang */
+    align-items: center;     /* căn dọc */
+    display: flex;
+    min-height: 100vh;
+    
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+.form{
+    width: 100%;
+    max-width: 700px;
+    
+    display: block;
+    background-color: white;
+    margin:auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius:5px ;
+    
+}
+.form-group{
+   margin:20px 20px;
+   display: grid;
+}
+.form__heading{
+    margin-top: 30px;
+    font-size:20px ;
+    color: var(--primary-color);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.form__title{
+    
+    font-size:16px;
+    color:var(--text-color);
+    font-weight: 600;
+    
+    
+}
+.form__input{
+    font-size: 16px;
+    padding:10px 5px;
+    margin:5px 0;
+    
+    border:1px solid rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px #e0e0e0;
+    
+    
+}
+.invalid{
+    border:2px solid rgb(241, 18, 18);
+    outline: none;
+}
+.invalid:hover {
+    background-color:rgba(255, 0, 0, 0.1);
+}
+.form__message{
+    font-size:13px ;
+    color: red;
+    margin-top: 5px;
+    
+    
+}
+.btn:hover{
+   opacity: 0.7;
+}
+.choice{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 12px;
+    margin-top: 16px;
+}

@@ -1,0 +1,253 @@
+.container{
+    background-color: #f5f5f5;
+  
+    overflow: hidden;
+}
+.Detail-product{
+    background-color: #fff;
+    margin-top: 50px;
+}
+.Detail-product-imgs{
+    padding: 15px 0;
+   
+}
+.Detail-product-img{
+    width: 450px;
+    height: 550px;
+    margin-right:20px
+  
+}
+.Item-product-img{
+    width: 82px;
+    height: 82x;
+    border:2px solid #fff;
+}
+.List-product-img{
+    list-style: none;
+    display:flex;
+    
+    justify-content: center;
+    padding:0;
+
+    
+}
+.Item-product-img:hover {
+    border:2px solid var(--primary-color);
+}
+.Detail-product-img{
+    margin-left: 20px;
+}
+.Product-rate-info{
+    display: flex;
+    
+}
+.Detail-product-info{
+    
+    flex:1
+}
+
+.Detail-product{
+    display: flex;
+}
+.Detail-product-title{
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.5rem;
+    max-width: 70%;
+}
+.Product-rate{
+    margin-right:5px;
+    
+}
+.Product-rate-point{
+    font-size: 1.4rem;
+}
+.Product-rate-point{
+    margin-right:3px ;
+}
+.Product-asses{
+    margin-left: 10px;
+    font-size: 1.4rem;
+}
+.Product-asses-count{
+    padding-right:3px;
+    
+}
+.Detail-product-price{
+    background-color: #e1e1e1;
+    line-height: 1.6rem;
+    font-size: 30px;
+    padding:15px 20px;
+    color:var(--primary-color);
+    margin:30px 0;
+}
+.Product-order{
+    display: flex;
+    align-items: center;
+}
+.Input-quantity{
+    width: 40px;
+   justify-items: center;
+}
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-input {
+  -moz-appearance: textfield;
+}
+.truck-logo{
+    color:var(--primary-color)
+}
+.Product-trans-desc{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    color:var(--text-color)
+}
+.Product-trans-info{
+    display: flex;
+    margin:0 20px;
+    font-size: 1.4rem;
+}
+.Product-trans{
+    display: flex;
+    margin:30px 0;
+}
+.trans-label{
+    font-size: 1.4rem;
+    color:#757575;
+    min-width: 100px;
+}
+.voucher{
+    font-size: 1.2rem;
+    color:#0000008a;
+    line-height: 14.4px;
+
+}
+.fee{
+    line-height: 21px;
+}
+.Producter-quantity{
+    margin:0 20px;
+}
+.quantity-label{
+    margin-left:10px;
+}
+.Product-submit{
+    margin:50px 0 30px 0;
+}
+.Desc-title{
+    font-size: 30px;
+    font-weight: 400;
+}
+.Desc-text{
+    font-size: 16px;
+    font-weight: 350;
+    color: var(--text-color);
+}
+.Detail-description{
+    margin:100px 0;
+}
+.Product-title{
+display: flex;
+justify-content: space-between;
+}
+.Product-suggest{
+    background-color: #fff;
+    margin: 50px 0 30px 0;
+    padding-top: 1px;
+    
+}
+.suggest-title{
+    font-size: 2rem;
+    color: var(--text-color);
+    font-weight: 450;
+    margin: 20px 0 0 10px;
+    
+    
+}
+.Product-review{
+    background-color: #fff;
+    padding:1px 0
+    
+}
+.Review-content{
+    margin:20px 5px;
+}
+.nav-review{
+    display: flex;
+    background-color: #b0e1f746;
+    padding: 1px;
+}
+.margin{
+    margin:30px 0;
+    display: flex;
+    width: 100%;
+}
+.review-point-total{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+}
+.review-point{
+    color:var(--primary-color);
+    font-size: 1.4rem;
+    
+}
+.review-point-current{
+    font-size: 2rem;
+    margin-right:5px ;
+    
+}
+.review-star{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding:0;
+    font-size: 1.4rem;
+   
+}
+.choice-star{
+    
+    width: 70%;
+}
+.review-item{
+    margin:20px 0;
+      display: flex;
+      position: relative;
+}
+.reviewer-avt{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.review-list{
+    display: flex;
+    flex-direction: column;
+    margin-left:10px;
+    font-size: 1.4rem;
+}
+.review-point-star{
+    color: #0daef9d3;
+    margin:5px 0;
+}
+.comment-review{
+    font-size: 1.6rem;
+    margin-top:5px
+}
+.review-item::before{
+      content:"";
+    position: absolute;
+   
+    width: 100%;
+    border-style: solid;
+    border:1px solid #c5c5ca;
+   bottom: -20px;
+}

@@ -1,0 +1,209 @@
+.checkout-container{
+margin:20px 0;
+}
+.checkout-info-customer{
+    background-color: #fff;
+    padding:1px 0;
+    
+  
+}
+.checkout-address-title{
+    font-size: 1.8rem;
+    color:var(--primary-color);
+    margin-bottom: 15px;
+    
+}
+.checkout-info-content{
+    margin:20px 20px;
+}
+.address-title{
+    margin-left: 10px;
+}
+.checkout-info{
+    font-size: 1.4rem;
+    display: flex;
+}
+.checkout-name,
+.checkout-phone{
+    font-weight: 700;
+}
+.checkout-phone{
+margin:0 10px;
+}
+.checkout-address{
+    margin:0 10px;
+    font-weight: 400;
+}
+.change-address-btn{
+    border: none;
+    background-color: #fff;
+    color:var(--primary-color);
+    cursor: pointer;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+.checkout-product{
+    display:flex;
+    background-color: #fff;
+    margin:20px 0;
+}
+.checkout-info-product{
+    display: flex;
+    margin-left:20px;
+    flex:1;
+    
+    align-items: center;
+}
+.check-info-title{
+    display: flex;
+    flex:1;
+    justify-content: space-around;
+    margin-right: 20px;
+    align-items: center;
+    
+}
+.checkout-text{
+    display: flex;
+    flex:1;
+    justify-content: right;
+    font-size: 1.4rem;
+}
+.checkout-product{
+    display:flex;
+    flex-direction: column;
+}
+.checkout-product-img{
+    height: 80px;
+    width: 80px;
+}
+.checkout-grid{
+    display: flex;
+    flex-direction: row;
+    margin:15px 0;
+    justify-content: center;
+}
+.checkout-product-name{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.wrapper-trans{
+    
+    background-color: #fff;
+    font-size: 1.4rem;
+    padding:1px 0;
+}
+.checkout-trans{
+    display: flex;
+    margin:15px 10px;
+    align-items: center;
+}
+.checkout-attent{
+min-width: 40%;
+}
+.attent-title{
+    line-height: 40px;
+    
+}
+.attent-input{
+    padding:5px 0;
+    margin: 0 10px;
+    width: 70%;
+}
+.checkout-trans-info{
+    
+    display: flex;
+   
+    flex:1;
+}
+.checkout-trans-method{
+    display: flex;
+    flex:1;
+   
+   
+}
+.method-title{
+    min-width: 25%;
+    
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
+.left{
+    display: flex;
+    
+}
+.right{
+    display: flex;
+    justify-content: right;
+    
+}
+.change-method{
+    color:var(--primary-color);
+    cursor: pointer;
+    
+}
+.checkout-total-wrapper{
+    background-color: #fff;
+    padding:1px 0;
+}
+.checkout-total-content{
+    margin: 15px 10px;
+}
+.checkout-pay{
+    display: flex;
+    justify-content: space-between;
+}
+.pay-method{
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.pay-method-name{
+    padding-right: 20px;
+    
+}
+.pay-method-change{
+    cursor: pointer;
+    color: var(--primary-color);
+}
+.cost-list{
+    display: flex;
+    
+    flex-direction: column;
+    align-items: flex-end;
+}
+.cost-item{
+    
+min-width: 232px;
+display: flex;
+
+justify-content: space-between;
+margin: 10px 0;
+}
+.cost-value{
+    font-size: 1.4rem;
+}
+.cost-value-total{
+    font-size: 2.4rem;
+    color:var(--primary-color)
+}
+.btn-total{
+    display: flex;
+    justify-content: right;
+    margin: 10px 0;
+}
+.text{
+    font-size: 1.4rem;
+}
+.logo-payment{
+    height: 20px;
+    width: 20px;
+    margin: 0 10px;
+}
+.payment-item{
+    font-size: 1.4rem;
+    display: flex;
+   line-height: 25px;
+}
