@@ -35,12 +35,20 @@ const cx = classNames.bind(styles);
 
 function Statistics() {
     const [stats, setStats] = useState([]);
-
+    const [ordersCurrent,setOrdersCurren]=useState([4])
     useEffect(() => {
         try {
             const fetchData = async () => {
                 const response = await axios.get('/admin/Statistics');
                 setStats(response);
+                console.log(response);
+                setOrdersCurren([
+                    response[0].listOrder.filter(a=>a.status=='Chờ xử lý').length,
+                    response[0].listOrder.filter(a=>a.status=='Đang giao').length,
+                    response[0].listOrder.filter(a=>a.status=='Hoàn thành').length,
+                    response[0].listOrder.filter(a=>a.status=='Đã hủy').length,
+                ]
+                ) 
             }
             fetchData();
         } catch(error) {
@@ -61,8 +69,7 @@ function Statistics() {
                         borderColor: 'rgba(75,192,192,1)',
                         backgroundColor: 'rgba(75,192,192,0.2)',
                         tension: 0.3
-                    },
-                    
+                    }
                 ]
             }
         }
@@ -92,13 +99,11 @@ function Statistics() {
                         return `${label}: ${formattedNumber}đ`;
                     },
                     afterLabel:function(context){
-                         
-                        const value = context.dataIndex  ;
-                        const totalOrders = stats[value]?.totalOrders||0 ;
+                        const value = context.dataIndex;
+                        const totalOrders = stats[value]?.totalOrders||0;
                         return `Tổng đơn hàng : ${totalOrders}`;
                     }
                 }
-                
             }
         },
         scales: {
@@ -117,6 +122,52 @@ function Statistics() {
             }
         }
     };
+
+    const countsComparisonData = useMemo(()=>({
+        labels:['Đang chờ xử lý','Đang vận chuyển','Hoàn thành','Đã hủy'],
+        datasets: [
+            {
+                label: 'Số lượng đơn hàng',
+                data: ordersCurrent,
+                backgroundColor: ['#f39c12', '#3498db', '#2ecc71', '#e74c3c']
+            }
+        ]
+    }),[stats[0]])
+
+    const barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: 'Số lượng đơn hàng theo trạng thái',
+                font: {
+                    size: 16,
+                    weight: 'bold'
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Số lượng'
+                },
+                ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                        if (Math.floor(value) === value) {
+                            return value;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     return ( 
         <div className={cx('statistics-container')}>
@@ -137,6 +188,39 @@ function Statistics() {
                         {monthlyTrend && monthlyTrend.labels.length > 0 && 
                             <Line data={monthlyTrend} options={lineChartOptions} />
                         }
+                    </div>
+                </div>
+            </div>
+
+            {/* Order Statistics Section */}
+            <div className={cx('order-stats-section')}>
+                <div className={cx('order-stats-header')}>
+                    <h3>Thống kê đơn hàng tháng này</h3>
+                    <h5>Trạng thái đơn hàng</h5>
+                </div>
+                
+                <div className={cx('order-stats-chart')}>
+                    {ordersCurrent != null && 
+                        <Bar data={countsComparisonData} options={barChartOptions}/>
+                    }
+                </div>
+
+                <div className={cx('order-stats-legend')}>
+                    <div className={cx('legend-item')}>
+                        <div className={cx('legend-color', 'pending')}></div>
+                        <span className={cx('legend-label')}>Đang chờ xử lý ({ordersCurrent[0]})</span>
+                    </div>
+                    <div className={cx('legend-item')}>
+                        <div className={cx('legend-color', 'shipping')}></div>
+                        <span className={cx('legend-label')}>Đang vận chuyển ({ordersCurrent[1]})</span>
+                    </div>
+                    <div className={cx('legend-item')}>
+                        <div className={cx('legend-color', 'completed')}></div>
+                        <span className={cx('legend-label')}>Hoàn thành ({ordersCurrent[2]})</span>
+                    </div>
+                    <div className={cx('legend-item')}>
+                        <div className={cx('legend-color', 'cancelled')}></div>
+                        <span className={cx('legend-label')}>Đã hủy ({ordersCurrent[3]})</span>
                     </div>
                 </div>
             </div>

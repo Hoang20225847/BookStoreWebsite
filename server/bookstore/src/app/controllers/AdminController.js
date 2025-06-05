@@ -84,11 +84,27 @@ class AdminController{
         })
     }
    const now =new Date();
+   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
    const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
     const orders = await Order.find({ createdAt: { $gte: sixMonthsAgo } })
+    const ordersCurrent = orders.filter(order => {
+        return new Date(order.createdAt) >= startOfMonth &&
+           new Date(order.createdAt) <= endOfMonth;
+    })
     const monthlyStats=Array(6).fill(null).map((_,i)=>{
         const date= new Date();
         date.setMonth(date.getMonth()-(5-i));
+        if(i==0){
+            return{
+            month:date.getMonth()+1,
+            year:date.getFullYear(),
+            revenue:0,
+            totalOrders:0,
+            listOrder:ordersCurrent
+
+        }
+        }
         return{
             month:date.getMonth()+1,
             year:date.getFullYear(),
@@ -111,7 +127,8 @@ class AdminController{
         console.log(monthlyStats)
         return res.status(200).json(monthlyStats)
    }catch(error){
-    return res.tatus(400).json(error)
+    console.log(error)
+    return res.status(400).json(error)
    }}
        
        }
