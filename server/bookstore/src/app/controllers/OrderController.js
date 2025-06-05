@@ -166,6 +166,7 @@ class OrderController{
             
                  if(updateOrder.status=="Đang giao"){
                 updateOrder.status ="Hoàn thành"
+                updateOrder.isPay=true;
             }
             console.log(updateOrder.address);
              await updateOrder.save()
