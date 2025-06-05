@@ -29,7 +29,10 @@ function Sidebar() {
                                         <i className="fa-solid fa-receipt "></i>
                                         <span className={cx('category-title')}>Quản Lý Đơn Hàng</span>
                                 </Link>
-                                 
+                                <Link to="/admin/Statistics" onClick={(e)=>{setFilter(3)}} className={cx('category-item' ,`${filter==3?'category-item--primary':''}`)}>
+                                        <i className="fa-solid fa-chart-line "></i>
+                                        <span className={cx('category-title')}>Thống Kê</span>
+                                </Link>
                             </ul>
                         </nav>
                        

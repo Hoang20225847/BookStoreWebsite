@@ -14,6 +14,7 @@ import ManageUser from '../pages/ManageUser';
 import ManageOrder from '../pages/ManageOrder';
 import Password  from '../pages/Password';
 import Category from '../pages/Categori';
+import Statistics from '../pages/Statistics'
 import {ProfileLayout} from '../components/Layout'
 import {DetailLayout} from '../components/Layout'
 import {LoginLayout}           from '../components/Layout'
@@ -50,6 +51,7 @@ const PrivateRoutes = [
 const AdminRoutes=[
   {path:"/admin",component:ManageBook,Layout:AdminLayout},
   {path:"/admin/Users",component:ManageUser,Layout:AdminLayout},
-   {path:"/admin/Orders",component:ManageOrder,Layout:AdminLayout}
+   {path:"/admin/Orders",component:ManageOrder,Layout:AdminLayout},
+   {path:"/admin/Statistics",component:Statistics,Layout:AdminLayout}
 ]
 export {PublicRoutes,PrivateRoutes,AdminRoutes}

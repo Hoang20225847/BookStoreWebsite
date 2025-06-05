@@ -1,5 +1,6 @@
 const AccountAdmin= require('../models/AccountAdmins')
 const AccountUser= require('../models/AccountUsers')
+const Order =require('../models/Orders')
 const bcrypt=require('bcrypt')
 const saltRounds=10;
 const jwt =require('jsonwebtoken')
@@ -108,7 +109,7 @@ class AdminController{
         return{
             month:date.getMonth()+1,
             year:date.getFullYear(),
-            revenuenotPay:0,
+  revenuenotPay:0,
             revenueisPay:0,
             totalOrders:0
 
@@ -122,7 +123,7 @@ class AdminController{
             const stat = monthlyStats.find(m => m.month === orderMonth && m.year === orderYear);
             if (stat) {
                 stat.totalOrders += 1;
-                if(order.isPay)               
+  if(order.isPay)               
                { stat.revenueisPay += order.totalAmount;} // hoặc order.amount tuỳ theo model
                 else stat.revenuenotPay +=order.totalAmount
             }

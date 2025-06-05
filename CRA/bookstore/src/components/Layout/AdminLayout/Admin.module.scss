@@ -285,7 +285,7 @@ background-color: #fff;
 
 .statistics-container {
     padding: 20px;
-    background-color: #f5f6f8;
+ background-color: #f5f6f8;
 
     .admin-nav {
         margin-bottom: 30px;
@@ -297,8 +297,7 @@ background-color: #fff;
         gap: 20px;
         margin-bottom: 20px;
     }
-
-    .chart-section, .order-stats-section, .revenue-pie-section {
+ .chart-section, .order-stats-section, .revenue-pie-section {
         background: #ffffff;
         border-radius: 10px;
         padding: 20px;
@@ -319,7 +318,7 @@ background-color: #fff;
     }
 
     .order-stats-section {
-        .order-stats-chart {
+ .order-stats-chart {
             height: 300px;
             padding: 15px;
             background: #ffffff;
@@ -347,7 +346,7 @@ background-color: #fff;
                     height: 12px;
                     border-radius: 3px;
 
-                    &.pending { background-color: #f1c40f; }
+ &.pending { background-color: #f1c40f; }
                     &.shipping { background-color: #3498db; }
                     &.completed { background-color: #27ae60; }
                     &.cancelled { background-color: #e74c3c; }
@@ -355,14 +354,14 @@ background-color: #fff;
 
                 .legend-label {
                     font-size: 14px;
-                    color: #7f8c8d;
+ color: #7f8c8d;
                 }
             }
         }
     }
 
     .revenue-pie-section {
-        .pie-chart-container {
+ .pie-chart-container {
             height: 300px;
             padding: 15px;
             background: #ffffff;

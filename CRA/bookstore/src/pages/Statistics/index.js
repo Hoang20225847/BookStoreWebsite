@@ -43,7 +43,7 @@ function Statistics() {
                 setStats(response);
                 console.log(response);
                 setOrdersCurren([
-                    response[5].listOrder.filter(a=>a.status=='Chờ xử lý').length,
+ response[5].listOrder.filter(a=>a.status=='Chờ xử lý').length,
                     response[5].listOrder.filter(a=>a.status=='Đang giao').length,
                     response[5].listOrder.filter(a=>a.status=='Hoàn thành').length,
                     response[5].listOrder.filter(a=>a.status=='Đã hủy').length,
@@ -66,7 +66,7 @@ function Statistics() {
                     {
                         label: 'Doanh thu (VNĐ)',
                         data: stats.map(item => (item.revenueisPay + item.revenuenotPay)),
-                        borderColor: '#3498db',
+  borderColor: '#3498db',
                         backgroundColor: 'rgba(52, 152, 219, 0.1)',
                         tension: 0.3
                     }
@@ -175,7 +175,7 @@ function Statistics() {
             datasets:[{
                 label:'Doanh thu: ',
                 data:[stats[5]?.revenueisPay ||"0",stats[5]?.revenuenotPay|| "0"],
-                backgroundColor: ['#27ae60', '#e74c3c']
+  backgroundColor: ['#27ae60', '#e74c3c']
             },]
         }
     },[stats[5]])
@@ -205,7 +205,7 @@ function Statistics() {
             tooltip:{
                 callbacks:{
                     label:function(context){
-                        const value =context.raw * 1000|| 0;
+ const value =context.raw * 1000|| 0;
                         const total = context.chart._metasets[context.datasetIndex].total *1000 || 0;
                         const percentage=Math.round((value / total)*100);
                         return `${value.toLocaleString()} VND (${percentage}%)`;
@@ -231,6 +231,7 @@ function Statistics() {
 
             {/* Stats Row */}
             <div className={cx('stats-row')}>
+
                 {/* Order Statistics Section */}
                 <div className={cx('order-stats-section')}>
                     <div className={cx('order-stats-header')}>
