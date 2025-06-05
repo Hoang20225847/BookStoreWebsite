@@ -43,10 +43,10 @@ function Statistics() {
                 setStats(response);
                 console.log(response);
                 setOrdersCurren([
-                    response[0].listOrder.filter(a=>a.status=='Chờ xử lý').length,
-                    response[0].listOrder.filter(a=>a.status=='Đang giao').length,
-                    response[0].listOrder.filter(a=>a.status=='Hoàn thành').length,
-                    response[0].listOrder.filter(a=>a.status=='Đã hủy').length,
+                    response[5]?.listOrder?.filter(a=>a.status=='Chờ xử lý').length,
+                    response[5]?.listOrder?.filter(a=>a.status=='Đang giao').length,
+                    response[5]?.listOrder?.filter(a=>a.status=='Hoàn thành').length,
+                    response[5]?.listOrder?.filter(a=>a.status=='Đã hủy').length,
                 ]
                 ) 
             }
@@ -65,7 +65,7 @@ function Statistics() {
                 datasets: [
                     {
                         label: 'Doanh thu (VNĐ)',
-                        data: stats.map(item => item.revenue),
+                        data: stats.map(item => (item.revenueisPay + item.revenuenotPay)),
                         borderColor: 'rgba(75,192,192,1)',
                         backgroundColor: 'rgba(75,192,192,0.2)',
                         tension: 0.3
@@ -129,10 +129,10 @@ function Statistics() {
             {
                 label: 'Số lượng đơn hàng',
                 data: ordersCurrent,
-                backgroundColor: ['#f39c12', '#3498db', '#2ecc71', '#e74c3c']
+                backgroundColor: ['#f1c40f', '#3498db', '#27ae60', '#e74c3c']
             }
         ]
-    }),[stats[0]])
+    }),[stats])
 
     const barChartOptions = {
         responsive: true,
@@ -169,6 +169,55 @@ function Statistics() {
         }
     }
 
+    const revenueTypePay=useMemo(()=>{
+        return{
+            labels:['Đã Thanh Toán','Chưa thanh toán'],
+            datasets:[{
+                label:'Doanh thu: ',
+                data:[stats[5]?.revenueisPay ||"0",stats[5]?.revenuenotPay|| "0"],
+                backgroundColor: ['#2ecc71', '#e74c3c']
+            },]
+        }
+    },[stats[5]])
+
+    const piechartOptions =useMemo(()=>({
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+            legend:{
+                position:'right',
+                labels:{
+                    boxWidth: 15,
+                    padding: 15,
+                    font: {
+                        size: 12
+                    }
+                }
+            },
+            title:{
+                display:true,
+                text:'Tỷ lệ doanh thu tháng hiện tại đã thanh toán',
+                font: {
+                    size: 16,
+                    weight: 'bold'
+                }
+            },
+            tooltip:{
+                callbacks:{
+                    label:function(context){
+                        const value =context.raw *1000|| 0;
+                        const total = context.chart._metasets[context.datasetIndex].total || 0;
+                        const percentage=Math.round((value / total)*100);
+                        return `${value.toLocaleString()} VND (${percentage}%)`;
+                    }
+                },
+                title:function(context){
+                    return context[0].label;
+                }
+            }
+        }
+    }),[stats])
+
     return ( 
         <div className={cx('statistics-container')}>
             <div className={cx('admin-nav')}>
@@ -176,6 +225,51 @@ function Statistics() {
                     <div>
                         <i className="fa-solid fa-chart-line"></i>
                         <span className={cx('admin-title-name')}>Thống Kê Doanh Thu</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Stats Row */}
+            <div className={cx('stats-row')}>
+                {/* Revenue Pie Chart Section */}
+                <div className={cx('revenue-pie-section')}>
+                    <h3>Tỷ Lệ Thanh Toán Doanh Thu</h3>
+                    <h5>Tỷ lệ thanh toán tháng này</h5>
+                    <div className={cx('pie-chart-container')}>
+                        {stats && <Pie data={revenueTypePay} options={piechartOptions}/>}
+                    </div>
+                </div>
+
+                {/* Order Statistics Section */}
+                <div className={cx('order-stats-section')}>
+                    <div className={cx('order-stats-header')}>
+                        <h3>Thống kê đơn hàng tháng này</h3>
+                        <h5>Trạng thái đơn hàng</h5>
+                    </div>
+                    
+                    <div className={cx('order-stats-chart')}>
+                        {ordersCurrent != null && 
+                            <Bar data={countsComparisonData} options={barChartOptions}/>
+                        }
+                    </div>
+
+                    <div className={cx('order-stats-legend')}>
+                        <div className={cx('legend-item')}>
+                            <div className={cx('legend-color', 'pending')}></div>
+                            <span className={cx('legend-label')}>Đang chờ xử lý ({ordersCurrent[0]})</span>
+                        </div>
+                        <div className={cx('legend-item')}>
+                            <div className={cx('legend-color', 'shipping')}></div>
+                            <span className={cx('legend-label')}>Đang vận chuyển ({ordersCurrent[1]})</span>
+                        </div>
+                        <div className={cx('legend-item')}>
+                            <div className={cx('legend-color', 'completed')}></div>
+                            <span className={cx('legend-label')}>Hoàn thành ({ordersCurrent[2]})</span>
+                        </div>
+                        <div className={cx('legend-item')}>
+                            <div className={cx('legend-color', 'cancelled')}></div>
+                            <span className={cx('legend-label')}>Đã hủy ({ordersCurrent[3]})</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,39 +282,6 @@ function Statistics() {
                         {monthlyTrend && monthlyTrend.labels.length > 0 && 
                             <Line data={monthlyTrend} options={lineChartOptions} />
                         }
-                    </div>
-                </div>
-            </div>
-
-            {/* Order Statistics Section */}
-            <div className={cx('order-stats-section')}>
-                <div className={cx('order-stats-header')}>
-                    <h3>Thống kê đơn hàng tháng này</h3>
-                    <h5>Trạng thái đơn hàng</h5>
-                </div>
-                
-                <div className={cx('order-stats-chart')}>
-                    {ordersCurrent != null && 
-                        <Bar data={countsComparisonData} options={barChartOptions}/>
-                    }
-                </div>
-
-                <div className={cx('order-stats-legend')}>
-                    <div className={cx('legend-item')}>
-                        <div className={cx('legend-color', 'pending')}></div>
-                        <span className={cx('legend-label')}>Đang chờ xử lý ({ordersCurrent[0]})</span>
-                    </div>
-                    <div className={cx('legend-item')}>
-                        <div className={cx('legend-color', 'shipping')}></div>
-                        <span className={cx('legend-label')}>Đang vận chuyển ({ordersCurrent[1]})</span>
-                    </div>
-                    <div className={cx('legend-item')}>
-                        <div className={cx('legend-color', 'completed')}></div>
-                        <span className={cx('legend-label')}>Hoàn thành ({ordersCurrent[2]})</span>
-                    </div>
-                    <div className={cx('legend-item')}>
-                        <div className={cx('legend-color', 'cancelled')}></div>
-                        <span className={cx('legend-label')}>Đã hủy ({ordersCurrent[3]})</span>
                     </div>
                 </div>
             </div>
