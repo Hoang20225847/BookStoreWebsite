@@ -109,8 +109,8 @@ class AdminController{
         return{
             month:date.getMonth()+1,
             year:date.getFullYear(),
+  revenuenotPay:0,
             revenueisPay:0,
-            revenuenotPay:0,
             totalOrders:0
 
         }
@@ -123,11 +123,9 @@ class AdminController{
             const stat = monthlyStats.find(m => m.month === orderMonth && m.year === orderYear);
             if (stat) {
                 stat.totalOrders += 1;
-                if(order.isPay)
-                {stat.revenueisPay += order.totalAmount;}
-                else{
-                    stat.revenuenotPay += order.totalAmount;
-                } // hoặc order.amount tuỳ theo model
+  if(order.isPay)               
+               { stat.revenueisPay += order.totalAmount;} // hoặc order.amount tuỳ theo model
+                else stat.revenuenotPay +=order.totalAmount
             }
         });
         console.log(monthlyStats)

@@ -43,10 +43,10 @@ function Statistics() {
                 setStats(response);
                 console.log(response);
                 setOrdersCurren([
-                    response[5]?.listOrder?.filter(a=>a.status=='Chờ xử lý').length,
-                    response[5]?.listOrder?.filter(a=>a.status=='Đang giao').length,
-                    response[5]?.listOrder?.filter(a=>a.status=='Hoàn thành').length,
-                    response[5]?.listOrder?.filter(a=>a.status=='Đã hủy').length,
+ response[5].listOrder.filter(a=>a.status=='Chờ xử lý').length,
+                    response[5].listOrder.filter(a=>a.status=='Đang giao').length,
+                    response[5].listOrder.filter(a=>a.status=='Hoàn thành').length,
+                    response[5].listOrder.filter(a=>a.status=='Đã hủy').length,
                 ]
                 ) 
             }
@@ -66,8 +66,8 @@ function Statistics() {
                     {
                         label: 'Doanh thu (VNĐ)',
                         data: stats.map(item => (item.revenueisPay + item.revenuenotPay)),
-                        borderColor: 'rgba(75,192,192,1)',
-                        backgroundColor: 'rgba(75,192,192,0.2)',
+  borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
                         tension: 0.3
                     }
                 ]
@@ -175,7 +175,7 @@ function Statistics() {
             datasets:[{
                 label:'Doanh thu: ',
                 data:[stats[5]?.revenueisPay ||"0",stats[5]?.revenuenotPay|| "0"],
-                backgroundColor: ['#2ecc71', '#e74c3c']
+  backgroundColor: ['#27ae60', '#e74c3c']
             },]
         }
     },[stats[5]])
@@ -205,8 +205,8 @@ function Statistics() {
             tooltip:{
                 callbacks:{
                     label:function(context){
-                        const value =context.raw *1000|| 0;
-                        const total = context.chart._metasets[context.datasetIndex].total || 0;
+ const value =context.raw * 1000|| 0;
+                        const total = context.chart._metasets[context.datasetIndex].total *1000 || 0;
                         const percentage=Math.round((value / total)*100);
                         return `${value.toLocaleString()} VND (${percentage}%)`;
                     }
@@ -231,14 +231,6 @@ function Statistics() {
 
             {/* Stats Row */}
             <div className={cx('stats-row')}>
-                {/* Revenue Pie Chart Section */}
-                <div className={cx('revenue-pie-section')}>
-                    <h3>Tỷ Lệ Thanh Toán Doanh Thu</h3>
-                    <h5>Tỷ lệ thanh toán tháng này</h5>
-                    <div className={cx('pie-chart-container')}>
-                        {stats && <Pie data={revenueTypePay} options={piechartOptions}/>}
-                    </div>
-                </div>
 
                 {/* Order Statistics Section */}
                 <div className={cx('order-stats-section')}>
@@ -270,6 +262,15 @@ function Statistics() {
                             <div className={cx('legend-color', 'cancelled')}></div>
                             <span className={cx('legend-label')}>Đã hủy ({ordersCurrent[3]})</span>
                         </div>
+                    </div>
+                </div>
+
+                {/* Revenue Pie Chart Section */}
+                <div className={cx('revenue-pie-section')}>
+                    <h3>Tỷ Lệ Thanh Toán Doanh Thu</h3>
+                    <h5>Tỷ lệ thanh toán tháng này</h5>
+                    <div className={cx('pie-chart-container')}>
+                        {stats && <Pie data={revenueTypePay} options={piechartOptions}/>}
                     </div>
                 </div>
             </div>
